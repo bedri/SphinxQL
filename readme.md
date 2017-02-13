@@ -1,17 +1,22 @@
-## SphinxQL library for Laravel 5.1
+## SphinxQL library for Laravel 5.4
 
-This is a simple library that will help you to query a sphinx search server using SphinxQL.  
+## IMPORTANT:
+**This is forked from https://github.com/Mochaka/SphinxQL so please give credits to Mochaka for his work.
+I adjusted some minor issues for this to work in Laravel 5.4 where Providers array syntax changed a little bit and some other changes exists.**
+
+## From Mochaka's presentation
+`This is a simple library that will help you to query a sphinx search server using SphinxQL.
 My main motivation for putting together this package was to interface easily 
 with Sphinx Real-time indexes on Laravel 4 (Updating rt indexes is ONLY possible using SphinxQL)
 
 As an added bonus, SphinxQL is much more performant than SphinxAPI: 
-http://sphinxsearch.com/blog/2010/04/25/sphinxapi-vs-sphinxql-benchmark/
+http://sphinxsearch.com/blog/2010/04/25/sphinxapi-vs-sphinxql-benchmark/`
 
 ## Installation
 
 Add `mochaka/sphinxql` to `composer.json`.
 ```json
-    "mochaka/sphinxql": "1.0"
+    "mochaka/sphinxql": "^1.0"
 ```    
 Run `composer update` to pull down Sphinxql. Note that Sphinxql has a 
 dependency on 'FoolCode/SphinxQL-Query-Builder', which does much of the weight lifting 
@@ -20,23 +25,23 @@ dependency on 'FoolCode/SphinxQL-Query-Builder', which does much of the weight l
 Now open up `app/config/app.php` and add the service provider to your `providers` array.
 ```php
     'providers' => array(
-        'Mochaka\Sphinxql\SphinxqlServiceProvider',
+        Mochaka\Sphinxql\SphinxqlServiceProvider::class,
     )
 ```
 and the alias:
 ```php
     'aliases' => array(
-        'SphinxQL'         => 'Mochaka\Sphinxql\Facades\SphinxqlFacade',
+        'SphinxQL'         => Mochaka\Sphinxql\Facades\SphinxqlFacade::class,
     )
 ```
 
 If you need to override the default configuration options (server/port), please use the config publish command
 
 ```php
-php artisan config:publish Mochaka/sphinxql
+php artisan vendor:publish
 ``` 
 
-## RT (Real-Time) Indexes in Sphinx
+## RT (Real-Time) Indexes in Sphinx (From Mochaka's presentation)
 
 The main differences between the conventional and RT indexes in Sphinx are:
 
